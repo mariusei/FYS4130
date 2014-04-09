@@ -146,7 +146,36 @@ The first distribution to be examined is the power law approximation to the log-
             \int_{-\infty}^{+\infty} \frac{1}{x} \diff x = \infty
             \label{eq:diverging_dist}
         \end{equation}
-        alas, the 
+        in other words, the integral diverges, and for that no normalisation constant exists. For $|x| \to 0$, $1/|x| \to \infty$, and for $|x| \to \infty$, $1/|x| \to 0$, so that cut off values must be introduced when implementing the distribution numerically (when is $|x|$ small enough to make $1/|x|$ approximately infinitely large, and inversely likewise for large $|x|$?).
+
+    \item For a random variable $y$ distributed following the flat distribution $P_0(y)$ in between $-1$ and $+1$, a change of variable $y \to x$ must not change the probability over an infinitesimal small step;
+        \begin{equation}
+            P_0(y) \diffd y = P(x) \diffd x
+            \label{eq:consv_prob}
+        \end{equation}
+        so that either distribution can be expressed in terms of the other,
+        \begin{align}
+            P(x) &= P_0(y) \frac{\diffd y}{\diffd x} \notag \\
+            &= \frac{P_0(y)}{x'(y)}
+            \label{eq:expdist_distilled}
+        \end{align}
+        where the prime ($'$) denotes derivative with respect to $y$, ie., $' \equiv \diffd / \diffd y$. 
+
+    \item Using the change of variable $x = Be^{Ay}$ and the relation of eq.~(\ref{eq:expdist_distilled}), the $x$-dependent distribution can be written as
+        \begin{align}
+            P(x) &= \frac{P_0(y(x))}{x'(y)} = \frac{1}{2} \frac{1}{Ax},
+            \label{eq:px}
+        \end{align}
+        where it was used that $x'(y) = \diffd (Be^{Ay})/\diffd y = ABe^{Ay} = Ax$. 
+
+        The valid range for the distribution follows from the endpoints of the flat distribution. The minimum is given by $x(y=-1) = Be^{-A}$, and the maximum is given by $x(y=+1) = Be^{+A}$. For other $y$, the distribution is zero.
+
+    \item The distribution of eq.~(\ref{eq:px}) is normalised,
+        \begin{align*}
+            \int_{-\infty}^{\infty} P(x) \diff x &= \int_{Be^{-A}}^{Be^{+A}} \frac{1}{2Ax} \diff x \notag \\
+            &=  \frac{1}{2A}\int_{Be^{-A}}^{Be^{+A}} \frac{1}{x} \diff x = \frac{1}{2A} \ln x \notag \\
+            &= 
+        \end{align*}<++>
 \end{enumerate}<++>
 
 %%%%%%%%%%% BIBLIOGRAPHY %%%%%%%%%%%%%%%%%
