@@ -1,0 +1,169 @@
+\documentclass[a4paper,11pt]{article}
+%\documentclass[preprint]{aa}
+
+%\documentclass[preprint]{aastex}
+
+%\documentclass[journal = ancham]{achemso}
+%\setkeys{acs}{useutils = true}
+%\usepackage{fullpage}
+\usepackage{natbib,twoopt}
+\pretolerance=2000
+\tolerance=6000
+\hbadness=6000
+%\usepackage[landscape]{geometry}
+%\usepackage{pxfonts}
+%\usepackage{cmbright}
+%\usepackage[varg]{txfonts}
+%\usepackage{mathptmx}
+%\usepackage{tgtermes}
+\usepackage[utf8]{inputenc}
+%\usepackage{fouriernc}
+%\usepackage[adobe-utopia]{mathdesign}
+\usepackage[T1]{fontenc}
+%\usepackage[norsk]{babel}
+\usepackage{epsfig}
+\usepackage{graphicx}
+\usepackage{amsmath}
+%\usepackage[version=3]{mhchem}
+\usepackage{pstricks}
+\usepackage[font=small,labelfont=bf,tableposition=below]{caption}
+%\usepackage{subfig}
+\usepackage{subcaption}
+%\usepackage{varioref}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{sverb}
+%\usepackage{microtype}
+%\usepackage{enumerate}
+\usepackage{enumitem}
+%\usepackage{lineno}
+%\usepackage{booktabs}
+%\usepackage{changepage}
+%\usepackage[flushleft]{threeparttable}
+\usepackage{pdfpages}
+\usepackage{float}
+\usepackage{mathtools}
+%\usepackage{etoolbox}
+%\usepackage{xstring}
+\usepackage{aas_macros}
+
+\floatstyle{plaintop}
+\restylefloat{table}
+%\floatsetup[table]{capposition=top}
+
+\setcounter{secnumdepth}{3}
+
+\newcommand{\tr}{\, \text{tr}\,}
+\newcommand{\diff}{\ensuremath{\; \text{d}}}
+\newcommand{\diffd}{\ensuremath{\text{d}}}
+\newcommand{\sgn}{\ensuremath{\; \text{sgn}}}
+\newcommand{\UA}{\ensuremath{_{\uparrow}}}
+\newcommand{\RA}{\ensuremath{_{\rightarrow}}}
+\newcommand{\QED}{\left\{ \hfill{\textbf{QED}} \right\}}
+
+%% The below macros turn citations into ADS clickers in dvi, pdf, html output.
+%% EDP Sciences improved them in December 2012 to work also with pdflatex.
+\bibpunct{(}{)}{;}{a}{}{,}    %% natbib cite format used by A&A and ApJ
+\makeatletter
+ \newcommandtwoopt{\citeads}[3][][]{\href{http://adsabs.harvard.edu/abs/#3}%
+   {\def\hyper@linkstart##1##2{}%
+    \let\hyper@linkend\@empty\citealp[#1][#2]{#3}}}    %% Rutten, 2000
+ \newcommandtwoopt{\citepads}[3][][]{\href{http://adsabs.harvard.edu/abs/#3}%
+   {\def\hyper@linkstart##1##2{}%
+    \let\hyper@linkend\@empty\citep[#1][#2]{#3}}}      %% (Rutten 2000)
+ \newcommandtwoopt{\citetads}[3][][]{\href{http://adsabs.harvard.edu/abs/#3}%
+   {\def\hyper@linkstart##1##2{}%
+    \let\hyper@linkend\@empty\citet[#1][#2]{#3}}}      %% Rutten (2000)
+ \newcommandtwoopt{\citeyearads}[3][][]%
+   {\href{http://adsabs.harvard.edu/abs/#3}%
+   {\def\hyper@linkstart##1##2{}%
+    \let\hyper@linkend\@empty\citeyear[#1][#2]{#3}}}   %% 2000
+\makeatother
+
+%\newcommand{\diff}{%
+%    \IfEqCase{frac{\diff}{%
+%        {\ensuremath{frac{\text{d}} }}%
+%        {\ensuremath{\; \text{d}} }% 
+%    }[\PackageError{diff}{Problem with diff}{}]%
+%}%
+
+
+\date{\today}
+\title{Compulsory assignment spring 2014\\ \small{Statistical mechanics -- FYS4130}}
+\author{Marius Berge Eide \\ \texttt{m.b.eide@astro.uio.no}}
+
+
+\begin{document}
+
+
+\onecolumn
+\maketitle{}
+
+
+\section{Part 1}
+
+\begin{enumerate}
+    \item \textbf{Normalisation and variance}
+
+        The distribution $P_0(x)$ is normalised;
+        \begin{align*}
+            \int_{-\infty}^{+\infty} P_0(x) \diff x &= \int_{-1}^{+1} \frac{1}{2} \diff x \\
+            &= \frac{1}{2} \left[ 1 - \left( -1 \right) \right] = 1
+        \end{align*}
+        and the variance $\langle \Delta x^2 \rangle$ can be found as $\langle \Delta x^2 \rangle - \langle \Delta x \rangle^2$ with
+        \begin{align*}
+            \langle x \rangle &= \int_{-\infty}^{+\infty} x P_0(x) \diff x = \int_{-1}^{+1} x \frac{1}{2} \diff x \\
+            &= \frac{1}{2} \left[ \frac{1}{2} \left( 1^2 - (-1)^2 \right) \right] = 0
+        \end{align*}
+        and
+        \begin{align*}
+            \langle x^2 \rangle &=  \int_{-\infty}^{+\infty} x^2 P_0(x) \diff x = \int_{-1}^{+1} x^2 \frac{1}{2} \diff x \\
+            &= \frac{1}{2} \left[ \frac{1}{3} \left( 1^3 - (-1)^3 \right) \right] \\
+            &= \frac{1}{6} 2 = \frac{1}{3}
+        \end{align*}
+        giving
+        \begin{align}
+            \langle \Delta x^2 \rangle &= \langle \Delta x^2 \rangle - \langle \Delta x \rangle^2 \notag \\
+            &= \frac{1}{3} - 0 = \frac{1}{3}.
+            \label{eq:variance1}
+        \end{align}
+
+    \item \textbf{Random sequence}<++>
+
+    \item \textbf{Histogram}<++>
+\end{enumerate}<++>
+
+\section{Part 2 -- The central limit theorem}
+The first distribution to be examined is the power law approximation to the log-normal distribution;
+\begin{equation}
+    P(x) \propto \frac{1}{x}
+    \label{eq:powerlawdist}
+\end{equation}
+
+\begin{enumerate}
+    \item The distribution is not normalisable as
+        \begin{equation}
+            \int_{-\infty}^{+\infty} \frac{1}{x} \diff x = \infty
+            \label{eq:diverging_dist}
+        \end{equation}
+        alas, the 
+\end{enumerate}<++>
+
+%%%%%%%%%%% BIBLIOGRAPHY %%%%%%%%%%%%%%%%%
+\bibliography{referanser}
+\bibliographystyle{apj}
+%\bibliographystyle{astroads}
+%\bibliographystyle{apj_hyperref}
+
+\clearpage
+\appendix
+\section{Appendix}
+\label{sec:appendix}
+
+\subsection{Peebles equation}
+\label{app:peebles}
+
+%\lstinputlisting[language=c++]{../mainMonteCarloVMC1.cpp}
+
+\end{document}
+
