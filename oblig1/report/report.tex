@@ -189,19 +189,40 @@ The first distribution to be examined is the power law approximation to the log-
             &= \frac{B^2}{4A} \left[ e^{2A} - e^{-2A} \right] = \frac{B^2}{2A} \sinh \left( 2A \right) \\
             &= \frac{B^2}{A} \cosh A \sinh A
         \end{align*}
-        giving the variance
+        giving the variance 
         \begin{align}
-        \langle \Delta x^2 \rangle &= \langle x^2 \rangle - \langle x \rangle^2 \\
-        &= \frac{B^2}{A} \cosh A \sinh A - \frac{B^2}{A^2} \sinh^2
-            \label{<++>}
-        \end{align}<++>
+        \langle \Delta x^2 \rangle &= \langle x^2 \rangle - \langle x \rangle^2 \notag \\
+        &= \frac{B^2}{A} \cosh A \sinh A - \frac{B^2}{A^2} \sinh^2 A \notag \\
+        &= \frac{B^2}{A} \sinh A \left( \cosh A - \frac{1}{A} \sinh A \right)
+            \label{eq:var_1}
+        \end{align}
 
+    \item The variance can be rewritten
+        \begin{align}
+            \langle \Delta x^2 \rangle &= \frac{B^2}{A^2} \sinh^2 A \left( A \frac{\cosh A}{\sinh A} -\frac{\sinh A}{\sinh A} \right) \notag \\
+            &= \frac{B^2}{A^2} \sinh^2 A \left( A \coth A - 1 \right)
+            \label{eq:var_2}
+        \end{align}
+        as $\tanh A = 1/\coth A$. 
 
-\end{enumerate}<++>
+    \item Seqence of X values
+    \item Other parameters
+    \item Other params, running average. Symmetric histogram?
+    \item Considering a random walk where each step follows $P(x)$ from eq.~(\ref{eq:px}), with independent steps, the mean-sqaure displacement can be found by using known features of the flat distribution $P_0(y)$. In the interval $[-1,1]$, the probability of going left or right is independent of location (and thus previous steps) and given by $P_0(y) = 1/2$. Either you go left, or you go right.
+
+        The change of variable allows us to retain the image of going left or right, but within a different interval and following a different distribution. The particle, on the other hand, should not be able to tell any difference. One important difference is that the probability distribution prefers some $x$ over others, that is, for $x \to Be^{-A}$, $P(x)$ grows.  
+
+        In \citet{2014Flekkoy}, the process of random walking is described using the probability of going right denoted as $p$, and the probability of going left denoted $q$. Using the probaility distribution in the exercise where the probaility of going right is equal the probability of going left, following the understanding of the flat distribution, we can set $p = q = P(x)$. The mean displacement to the left is 
+        \begin{equation}
+            \langle R \rangle = Np = NP(x) = \frac{N}{2Ax}
+            \label{eq:average_right}
+        \end{equation}
+\end{enumerate}
+and the 
 
 %%%%%%%%%%% BIBLIOGRAPHY %%%%%%%%%%%%%%%%%
 \bibliography{referanser}
-\bibliographystyle{apj}
+\bibliographystyle{astroads}
 %\bibliographystyle{astroads}
 %\bibliographystyle{apj_hyperref}
 
