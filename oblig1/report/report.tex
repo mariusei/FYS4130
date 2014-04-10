@@ -173,9 +173,30 @@ The first distribution to be examined is the power law approximation to the log-
     \item The distribution of eq.~(\ref{eq:px}) is normalised,
         \begin{align*}
             \int_{-\infty}^{\infty} P(x) \diff x &= \int_{Be^{-A}}^{Be^{+A}} \frac{1}{2Ax} \diff x \notag \\
-            &=  \frac{1}{2A}\int_{Be^{-A}}^{Be^{+A}} \frac{1}{x} \diff x = \frac{1}{2A} \ln x \notag \\
-            &= 
-        \end{align*}<++>
+            &=  \frac{1}{2A}\int_{Be^{-A}}^{Be^{+A}} \frac{1}{x} \diff x = \frac{1}{2A} \left[ \ln \left( Be^{+A} \right) - \ln \left( Be^{-A} \right) \right] \notag \\
+            &=  \frac{1}{2A} \left( A - (-A) \right) = 1
+        \end{align*}
+        and the variance can be found from $\langle x \rangle$, $\langle x^2 \rangle$;
+        \begin{align*}
+            \langle x \rangle &= \int_{-\infty}^{\infty} x P(x) \diff x = \int_{Be^{-A}}^{Be^{+A}} x \frac{1}{2Ax} \diff x \\
+            &=\frac{1}{2A}\int_{Be^{-A}}^{Be^{+A}} \diff x = \frac{B}{2A} \left( e^{+A} - e^{-A}  \right) \\
+            &= \frac{B}{A} \sinh A
+        \end{align*}
+        and
+        \begin{align*}
+            \langle x^2 \rangle &= \int_{-\infty}^{\infty} x^2 P(x) \diff x = \int_{Be^{-A}}^{Be^{+A}} x^2 \frac{1}{2Ax} \diff x \\
+            &=\frac{1}{2A}\int_{Be^{-A}}^{Be^{+A}} x \diff x = \frac{1}{2A} \left[ \frac{1}{2} (Be^{+A})^2 - \frac{1}{2}(Be^{-A})^2  \right] \\
+            &= \frac{B^2}{4A} \left[ e^{2A} - e^{-2A} \right] = \frac{B^2}{2A} \sinh \left( 2A \right) \\
+            &= \frac{B^2}{A} \cosh A \sinh A
+        \end{align*}
+        giving the variance
+        \begin{align}
+        \langle \Delta x^2 \rangle &= \langle x^2 \rangle - \langle x \rangle^2 \\
+        &= \frac{B^2}{A} \cosh A \sinh A - \frac{B^2}{A^2} \sinh^2
+            \label{<++>}
+        \end{align}<++>
+
+
 \end{enumerate}<++>
 
 %%%%%%%%%%% BIBLIOGRAPHY %%%%%%%%%%%%%%%%%
