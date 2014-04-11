@@ -128,9 +128,26 @@
             \label{eq:variance1}
         \end{align}
 
-    \item \textbf{Random sequence}<++>
+    \item \textbf{Random sequence}
+        A sequence of $N=2^{\left\{1,2,\dots,16  \right\}}$ $X$-values are produced\footnote{see the attached file \texttt{p1\_rng.py}}. The variance is plotted in fig.~(\ref{fig:12_variance}). 
 
-    \item \textbf{Histogram}<++>
+        \begin{figure}[htb]
+            \begin{center}
+                \includegraphics[width=\columnwidth]{../12_variance.pdf}
+            \end{center}
+            \caption{Variance of random numbers $X$ produced by a random number generator in the range $[-1,1)$ following the flat distribution $P_0(x)$, plotted against number of random numbers $N$. Note how the variance stabilises with increasing $N$. }
+            \label{fig:12_variance}
+        \end{figure}
+
+    \item \textbf{Histogram} A histogram showing the distribution of $N=2^{16}$ random numbers $X$ is plotted in fig.~(\ref{fig:histogram}). The central limit theorem states that, for high $N$, any distribution can be approximated by a normal distribution with variance 
+
+        \begin{figure}[htb]
+            \begin{center}
+                \includegraphics[width=\columnwidth]{../13_histogram.pdf}
+            \end{center}
+            \caption{Histogram showing the distribution of $N=2^{^16}$ random numbers $X$ generated under the flat distribution $P_0(x)$. The mean is zero to two decimals, and the variance is $\langle \Delta X^2 \rangle = 0.334094$.  }
+            \label{fig:13_histogram}
+        \end{figure}<++>
 \end{enumerate}<++>
 
 \section{Part 2 -- The central limit theorem}
