@@ -139,8 +139,9 @@
             \label{fig:12_variance}
         \end{figure}
 
-    \item \textbf{Histogram} A histogram  is plotted in fig.~(\ref{fig:histogram}). The central limit theorem states that, for high $k$, any distribution can be approximated by a normal distribution with variance
-        AAAAAAAAAAAAAAAAAAAAAAAAAA
+    \item \textbf{Histogram} A histogram  is plotted in fig.~(\ref{fig:13_histogram}). The central limit theorem states that, for high $k$, any distribution can be approximated by a normal distribution with variance $k \langle \Delta X^2 \rangle$ and mean $\langle X \rangle$.
+
+        The shape of the histogram closely resembles that of a Gaussian distribution, and indicates that the statistic $\langle X \rangle$ is distributed normally, even though each statistic is made up from drawing $N$ random numbers from the flat distribution $P_0(x)$. 
 
         \begin{figure}[htb]
             \begin{center}
@@ -148,8 +149,8 @@
             \end{center}
             \caption{Histogram showing the distribution of the mean $\langle X \rangle$ from $k=200$ samples where each is made up of $N=2^{4}$ random numbers drawn from the flat distribution. Note how the histogram resembles a normal distribution.}
             \label{fig:13_histogram}
-        \end{figure}<++>
-\end{enumerate}<++>
+        \end{figure}
+\end{enumerate}
 
 \section{Part 2 -- The central limit theorem}
 The first distribution to be examined is the power law approximation to the log-normal distribution;
@@ -195,11 +196,12 @@ The first distribution to be examined is the power law approximation to the log-
             &=  \frac{1}{2A} \left( A - (-A) \right) = 1
         \end{align*}
         and the variance can be found from $\langle x \rangle$, $\langle x^2 \rangle$;
-        \begin{align*}
-            \langle x \rangle &= \int_{-\infty}^{\infty} x P(x) \diff x = \int_{Be^{-A}}^{Be^{+A}} x \frac{1}{2Ax} \diff x \\
-            &=\frac{1}{2A}\int_{Be^{-A}}^{Be^{+A}} \diff x = \frac{B}{2A} \left( e^{+A} - e^{-A}  \right) \\
+        \begin{align}
+            \langle x \rangle &= \int_{-\infty}^{\infty} x P(x) \diff x = \int_{Be^{-A}}^{Be^{+A}} x \frac{1}{2Ax} \diff x \notag \\
+            &=\frac{1}{2A}\int_{Be^{-A}}^{Be^{+A}} \diff x = \frac{B}{2A} \left( e^{+A} - e^{-A}  \right) \notag \\
             &= \frac{B}{A} \sinh A
-        \end{align*}
+            \label{eq:mean_powerPX}
+        \end{align}
         and
         \begin{align*}
             \langle x^2 \rangle &= \int_{-\infty}^{\infty} x^2 P(x) \diff x = \int_{Be^{-A}}^{Be^{+A}} x^2 \frac{1}{2Ax} \diff x \\
@@ -223,9 +225,51 @@ The first distribution to be examined is the power law approximation to the log-
         \end{align}
         as $\tanh A = 1/\coth A$. 
 
-    \item Seqence of X values
-    \item Other parameters
-    \item Other params, running average. Symmetric histogram?
+    \item Calculating $k = 200$ sequences of $N$ random numbers distributed using the power law distribution of eq.~(\ref{eq:px}), with parameters $A= B= 1$, the mean (of the statistic mean) of all the sequences was found to be $\langle x \rangle = 0.5876$, and the mean of the variances was found to be $\langle \Delta x^2 \rangle = 0.1079$.
+
+        The analytical mean, using eq.~(\ref{eq:mean_powerPX}) is $1.175$ and thus differs significantly from the computed mean.
+
+        An attempt to plot the normal distribution,
+        \begin{equation}
+            P(x,\langle x \rangle, \langle \Delta x^2 \rangle) = \frac{1}{2 \pi N \langle \Delta x^2 \rangle} \exp \left[ - \frac{\left( x - \langle x \rangle \right)^2}{2 N \langle \Delta x^2 \rangle} \right]
+            \label{eq:normal_dist}
+        \end{equation}
+        is shown in fig.~\ref{fig:26_powerdist}). Here, a problem is the scaling of the histogram, and that the mean of the two distributions are located at different locations. In order to be able to compare the two, the $N$-dependece of eq.~(\ref{eq:normal_dist}) is removed, and the histogram is scaled according to $k$, the number of sequences.
+
+        \begin{figure}[htb]
+            \centering
+            \includegraphics[width=\columnwidth]{../26_powerdist.pdf}
+            \caption{Histogram showing the distribution of the statistic mean in $k=200$ samples, each with $N=1000$ elements drawn from the power-law distribution of eq.~(\ref{eq:px}), and a plot showing the normal distribution without $N$-dependence, centered around the analytical mean found in eq.~(\ref{eq:mean_powerPX}). There are obvious discrepancies. The mean of the two distributions are different, the variance of the computed distribution is much smaller than the analytical variance and the scaling of the histogram made it difficult to scale the normal distribution correctly. Here, the normal distribution is plotted without any $N$-dependence. }
+            \label{fig:26_powerdist}
+        \end{figure}
+
+    \item Changing parameters to $A = 4$, $B = N = 100$, the results can be seen in fig.~(\ref{fig:27_powerdist})
+
+
+        \begin{figure}[htb]
+            \centering
+            \includegraphics[width=\columnwidth]{../27_powerdist.pdf}
+            \caption{Histogram showing the distribution of the means from $k= 200$ samplings of $N=100$ random numbers distributed according to eq.~(\ref{eq:px}) with parameters $A = 4$, and $B = 100$. No normal distribution is overplotted, as the analytical mean is $\langle X \rangle = 682.2$, and the mean of the computed statistic mean is $8.515 \times 10^{-2}$. The analytical variance is $N \langle \Delta X^2 \rangle = 1.398 \times 10^{8}$ and the computed variance is $2.165 \times 10^{-4}$.   }
+            \label{fig:27_powerdist}
+        \end{figure}<++>
+
+
+    \item See fig.~(\ref{fig:28_hist}) for a histogram where the random numbers are distributed with parameters $A = 6$ and $B = N = 100$. See fig.~(\ref{fig:28_runningmean}) for a plot showing the running average of this histogram, where the averaging windows was $\Delta X = 10$.  
+
+        \begin{figure}[htb]
+            \centering
+            \includegraphics[width=\columnwidth]{../28_hist.pdf}
+            \caption{Histogram with 100 bins of $k=200$ samples with parameters $A = 6$, $B = N = 100$. The high number of bins is required in order to make a running average over these values. See fig.~(\ref{fig:28_runningmean}). }
+            \label{fig:28_hist}
+        \end{figure}
+
+        \begin{figure}[htb]
+            \centering
+            \includegraphics[width=\columnwidth]{../28_runningmean.pdf}
+            \caption{Running mean of computed histogram shown in fig.~(\ref{fig:28_hist}) with averaging window $\Delta X = 10$. The distribution appears to be slightly skewed, but does have the features of a Gaussian. The central limit theorem requires that the number of samples goes to infinity, that is $k \to \infty$, but in this case, $k=200$ and each sample consists of $N=100$ random numbers drawn from the power law distribution.    }
+            \label{fig:28_runningmean}
+        \end{figure}
+
     \item Considering a random walk where each step follows $P(x)$ from eq.~(\ref{eq:px}), with independent steps, the mean-sqaure displacement can be found by using known features of the flat distribution $P_0(y)$. In the interval $[-1,1]$, the probability of going left or right is independent of location (and thus previous steps) and given by $P_0(y) = 1/2$. Either you go left, or you go right.
 
         The change of variable allows us to retain the image of going left or right, but within a different interval and following a different distribution. The particle, on the other hand, should not be able to tell any difference. One important difference is that the probability distribution prefers some $x$ over others, that is, for $x \to Be^{-A}$, $P(x)$ grows.  
@@ -235,8 +279,15 @@ The first distribution to be examined is the power law approximation to the log-
             \langle R \rangle = Np = NP(x) = \frac{N}{2Ax}
             \label{eq:average_right}
         \end{equation}
+and the average displacement $\langle S \rangle$ is
+\begin{equation}
+    \langle S \rangle = 4Npq = \frac{4N}{4A^2 x^2} = \frac{N}{A^2x^2}.
+    \label{eq:avgdispl}
+\end{equation}
+
+However, the conceptual interpretation of the distribution $P(x)$ does not give a seemingly interpretable average displacement \textit{which has $x$-dependence}. In order to calculate the diffusion coefficient, I would need to know how the displacement relates to the distribution and the expressions derived earlier in this part.
+
 \end{enumerate}
-and the 
 
 %%%%%%%%%%% BIBLIOGRAPHY %%%%%%%%%%%%%%%%%
 \bibliography{referanser}
@@ -244,15 +295,14 @@ and the
 %\bibliographystyle{astroads}
 %\bibliographystyle{apj_hyperref}
 
-\clearpage
-\appendix
-\section{Appendix}
-\label{sec:appendix}
-
-\subsection{Peebles equation}
-\label{app:peebles}
+%\clearpage
+%\appendix
+%\section{Appendix}
+%\label{sec:appendix}
+%
+%\subsection{Peebles equation}
+%\label{app:peebles}
 
 %\lstinputlisting[language=c++]{../mainMonteCarloVMC1.cpp}
 
 \end{document}
-
